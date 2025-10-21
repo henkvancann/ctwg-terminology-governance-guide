@@ -519,16 +519,18 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
 </li>
 <li><a href="#integration" >Integration</a>
 <ul>
-<li><a href="#concerns" >Concerns</a>
+<li><a href="#spec-up-t-is-a-migration-from-spec-up" >Spec-Up-T is a migration from Spec-Up</a>
 <ul>
-<li><a href="#spec-up-and-specification-template" >Spec-Up and Specification Template</a></li>
-<li><a href="#roadmap-to-tev2" >Roadmap to TEv2</a></li>
-<li><a href="#tev2-explanation" >TEv2 Explanation</a></li>
-<li><a href="#docusaurus-example-current" >Docusaurus example CURRENT</a></li>
-<li><a href="#specup-example-current" >SpecUp example CURRENT</a></li>
-<li><a href="#always-archive-never-delete" >Always archive, never delete</a></li>
+<li><a href="#structural-differences-in-configuration" >Structural Differences in Configuration</a></li>
+<li><a href="#terminology-engine-dependency" >Terminology Engine Dependency</a></li>
+<li><a href="#rendering-and-output-mechanism-changes" >Rendering and Output Mechanism Changes</a></li>
+<li><a href="#command-line-and-automation-enhancements" >Command-Line and Automation Enhancements</a></li>
+<li><a href="#one-way-migration-path-provided" >One-Way Migration Path Provided</a></li>
+<li><a href="#conclusion-2" >Conclusion</a></li>
+<li><a href="#acknowledgement" >Acknowledgement</a></li>
 </ul>
 </li>
+<li><a href="#no-current-tev2" >No current TEv2</a></li>
 </ul>
 </li>
 <li><a href="#informative-references" >Informative references</a></li>
@@ -596,6 +598,11 @@ customElements.define("slide-panels",class extends HTMLElement{static get observ
 <li><a href="#spec-up" >Spec-Up</a></li>
 <li><a href="#tev2-definitions-appear-in-different-forms" >TEv2 definitions appear in different forms:</a></li>
 <li><a href="#discussion" >Discussion</a></li>
+<li><a href="#roadmap-to-tev2" >Roadmap to TEv2</a></li>
+<li><a href="#tev2-explanation" >TEv2 Explanation</a></li>
+<li><a href="#docusaurus-example-current" >Docusaurus example CURRENT</a></li>
+<li><a href="#specup-example-current" >SpecUp example CURRENT</a></li>
+<li><a href="#always-archive-never-delete" >Always archive, never delete</a></li>
 </ul>
 </li>
 <li><a href="#brief-history-of-the-guide" >Brief history of the guide</a></li>
@@ -2036,115 +2043,27 @@ Where mnenomic <code>KE</code> is the title of KERI spec in Spec-Up-T format and
 <!-- file: 72_integration.md -->
 <h2 id="integration"><a class="toc-anchor d-print-none" href="#integration">§</a> Integration</h2>
 <p>This is an informative section</p>
-<p>Spec-Up, Spec-Up Glossary tool, TEv2, and the KERISSE-engine (search engine, KERIDoc education) plus kerific tooling are gradually going to be integrated for the sake of concept &amp; terminology management in ToIP.</p>
-<p>This section might be why we anticipate this Governance Guide on future development the way we’ve done in the previous sections.</p>
-<h3 id="concerns"><a class="toc-anchor d-print-none" href="#concerns">§</a> Concerns</h3>
-<p>We share some concerns raised over the first months of 2024.</p>
-<h4 id="spec-up-and-specification-template"><a class="toc-anchor d-print-none" href="#spec-up-and-specification-template">§</a> Spec-Up and Specification Template</h4>
-<p>The current copy-and-paste strategy is leading to merging horror and “unrelated histories.”</p>
-<div class="mermaid">
-flowchart TD
- DIF --&gt; |SpecUp_Daniel_Buchner| SpecUp_60ae636
- SpecUp_60ae636 --&gt; |PR accepted| SpecUp_d392aa1
- SpecUp_d392aa1 --&gt; |commit| SpecUp_e63f252
- SpecUp_e63f252 --&gt; |commit| SpecUp_985a65b
- SpecUp_60ae636 --&gt; |copy Specification Template| ToIP_SpecUp_60ae636
- ToIP_SpecUp_60ae636 --&gt; |PR accepted| SpecUp_445a7db
- SpecUp_445a7db --&gt; |PR accepted| SpecUp_7667ec3
- SpecUp_7667ec3 --&gt;  |copy | Spec_kerific
- SpecUp_7667ec3 --&gt; |copy |keri-spec
- SpecUp_7667ec3 --&gt; |copy | acdc-spec
- SpecUp_445a7db --&gt; |copy | cesr-spec
- ToIP_SpecUp_60ae636 --&gt; |copy| trp-spec
- ToIP_SpecUp_60ae636 --&gt; |copy| tas-spec
-
- style DIF fill:#ffc;
- style SpecUp_60ae636 fill:#ffc;
- style SpecUp_d392aa1 fill:#ffc;
- style SpecUp_e63f252 fill:#ffc;
- style SpecUp_985a65b fill:#ffc;
-</div>
-<p>How should we work to stay in tune with each other and easily accept improvements?</p>
-<div class="mermaid">
-flowchart TD
- DIF --&gt; |SpecUp_Daniel_Buchner| SpecUp_60ae636
- SpecUp_60ae636 --&gt; |PR accepted| SpecUp_d392aa1
- SpecUp_d392aa1 --&gt; |commit| SpecUp_e63f252
- SpecUp_d392aa1 --&gt; |pull| ToIP_SpecUp_60ae636
- SpecUp_e63f252 --&gt; |commit| SpecUp_985a65b
- SpecUp_60ae636 --&gt; |Fork Specification Template| ToIP_SpecUp_60ae636
- ToIP_SpecUp_60ae636 --&gt; |PR accepted| SpecUp_445a7db
- SpecUp_445a7db --&gt; |fetch+merge| SpecUp_d392aa1
- SpecUp_445a7db --&gt; |PR accepted| SpecUp_7667ec3
- SpecUp_7667ec3 --&gt;  |Fork | Spec_kerific
- SpecUp_7667ec3 --&gt; |Fork |keri-spec
- SpecUp_7667ec3 --&gt; |Fork | acdc-spec
- SpecUp_445a7db --&gt; |Fork | cesr-spec
- ToIP_SpecUp_60ae636 --&gt; |Fork| trp-spec
- ToIP_SpecUp_60ae636 --&gt; |Fork| tas-spec
- SpecUp_985a65b --&gt; |fetch+merge| SpecUp_7667ec3
- SpecUp_7667ec3 --&gt; |pull| SpecUp_985a65b
-
- style DIF fill:#ffc;
- style SpecUp_60ae636 fill:#ffc;
- style SpecUp_d392aa1 fill:#ffc;
- style SpecUp_e63f252 fill:#ffc;
- style SpecUp_985a65b fill:#ffc;
-</div>
-<p><strong>Noticed the differences?</strong></p>
-<ol>
-<li>Through <em>forking</em> instead of <em>copying</em> we keep git histories compatible</li>
-<li>Through <code>fetch+merge</code> (or <code>pull</code> when no conflicts are expected), we not only keep DIF and ToIP synced, but also it is very straightforward to update all the gh-pages-based specification websites that <em>use</em> the Specification Template to:
-<ul>
-<li>sync functionality and data</li>
-<li>offer PRs from any of those installs</li>
-</ul>
-</li>
-</ol>
-<h4 id="roadmap-to-tev2"><a class="toc-anchor d-print-none" href="#roadmap-to-tev2">§</a> Roadmap to TEv2</h4>
-<p>As a TEv2 creator and frontman, we share Rieks Joosten’s viewpoint on this proposal for using Spec-Up refs and defs.</p>
-<p>He explained that the same features being discussed here were also added to TEv2.</p>
-<p>There is always tension between adding a lot of features and taking a long time or keeping things very minimal. He pointed out that creating glossaries based on cherry-picking glossary entries based on personal preferences can be problematic because it doesn’t actually establish shared understanding and criteria for defining terms.<br>
-The larger the group involved and the more varied their cultural backgrounds, the more problematic that can become. However, that doesn’t mean we shouldn’t start with tools that are actually working right now. Rieks’ personal preference is to use terminology that expresses the author’s intentions clearly. For example, reading the Spec-Up documentation was challenging for Rieks, because it was difficult to understand it without more context.</p>
-<p>Rieks would like to have several more sessions on TEv2 so we can still look at how we can use it for our terminology. He’s not opposed to enhancing Spec-Up for these features but, at the same time, keeping TEv2 tooling in progress.</p>
-<p>Rieks Joosten concluded that we need to see what tools are actually needed by both authors and readers to help them comprehend the terms they use. He can also explore how TEv2 tooling can be used to produce Spec-Up definitions.</p>
-<p>Rieks Joosten was in favor of proceeding with changes to Spec-Up but also continuing the work on TEv2 to tackle larger issues of terminology management.</p>
-<h4 id="tev2-explanation"><a class="toc-anchor d-print-none" href="#tev2-explanation">§</a> TEv2 Explanation</h4>
-<h5 id="current-structure"><a class="toc-anchor d-print-none" href="#current-structure">§</a> Current structure</h5>
-<div class="mermaid">
-flowchart LR
-A[A:Root];B[B:ScopeDir];C[/C:SAF/]; D[D:GlossaryDir]; E[E:CurTextDir]
- A --&gt;|install| B
- B --&gt;|config| C
- B --&gt;|populate| D
- B --&gt;|populate| E
-</div>
-<h4 id="docusaurus-example-current"><a class="toc-anchor d-print-none" href="#docusaurus-example-current">§</a> Docusaurus example CURRENT</h4>
-<div class="mermaid">
-flowchart LR
-A[A:Root];B[B:/docs];C[/C:saf.yaml/]; D[D:glossaries]; E[E:terms]
- A --&gt;|install| B
- B --&gt;|create| C
- B --&gt;|populate| D
- B --&gt;|populate| E
-</div>
-<h4 id="specup-example-current"><a class="toc-anchor d-print-none" href="#specup-example-current">§</a> SpecUp example CURRENT</h4>
-<div class="mermaid">
-flowchart LR
-A[A:Root];B[B:/spec];C[/C:saf.yaml/]; D[D:glossaries]; E[E:terms]
- A --&gt;|install| B
- B --&gt;|create| C
- B --&gt;|populate| D
- B --&gt;|populate| E
-</div>
-<h5 id="internal-scope"><a class="toc-anchor d-print-none" href="#internal-scope">§</a> Internal Scope</h5>
-<p><img src="https://github.com/henkvancann/terminology-governance-guide/blob/b64cd36d65c4b0076ccec3e0a30c3f17705e9220/diagrams/internal-scope-terminology-2024-02-26-144340.svg?raw=true" alt="internal-scope-terminology"></p>
-<h5 id="external-scopes-and-internal-scope"><a class="toc-anchor d-print-none" href="#external-scopes-and-internal-scope">§</a> External Scopes and internal scope</h5>
-<p><img src="https://github.com/henkvancann/terminology-governance-guide/blob/b64cd36d65c4b0076ccec3e0a30c3f17705e9220/diagrams/external-glossaries-import-2024-02-26-144418.svg?raw=true" alt="external-scope-terminology"></p>
-<h5 id="full-architecture"><a class="toc-anchor d-print-none" href="#full-architecture">§</a> Full architecture</h5>
-<p><img src="https://github.com/henkvancann/terminology-governance-guide/blob/b64cd36d65c4b0076ccec3e0a30c3f17705e9220/diagrams/tev2-architecture-2024-02-26-144443.svg?raw=true" alt="tev2-architecture"></p>
-<h4 id="always-archive-never-delete"><a class="toc-anchor d-print-none" href="#always-archive-never-delete">§</a> Always archive, never delete</h4>
-<p>Darrell O’Donnell clarified that technical maintainers will not delete any ToIP repos but will only archive them.</p>
+<p>Spec-Up from DIF, Spec-Up-T that started as “the Glossary tool”, TEv2, and the KERISSE-engine (search engine, KERIDoc education) plus <a href="">Kerific</a> tooling are gradually going to be integrated for the sake of concept &amp; terminology management.</p>
+<h3 id="spec-up-t-is-a-migration-from-spec-up"><a class="toc-anchor d-print-none" href="#spec-up-t-is-a-migration-from-spec-up">§</a> Spec-Up-T is a migration from Spec-Up</h3>
+<p>Spec-Up-T does not support a backwards-compatible merge-back into Spec-Up due to architectural, structural, and functional advancements that fundamentally extend beyond the scope and capabilities of the original Spec-Up.</p>
+<p>You can find the supporting arguments for this choice below.</p>
+<h4 id="structural-differences-in-configuration"><a class="toc-anchor d-print-none" href="#structural-differences-in-configuration">§</a> Structural Differences in Configuration</h4>
+<p>Spec-Up-T introduces a significantly updated specs.json structure, including new fields such as spec_terms_directory, external_specs, and external_specs_repos. These are absent in the original Spec-Up and are essential to how Spec-Up-T organizes and renders terminology data, making direct backward merging infeasible.</p>
+<h4 id="terminology-engine-dependency"><a class="toc-anchor d-print-none" href="#terminology-engine-dependency">§</a> Terminology Engine Dependency</h4>
+<p>Spec-Up-T integrates a dedicated terminology engine, which requires term definitions to be stored in individually structured files and tracked through terms-index.json. Spec-Up, by contrast, operates with simpler, monolithic Markdown files. This decoupling of terms is central to Spec-Up-T, and we cannot plausibly reverse-engineer it into Spec-Up without overhauling its processing logic.</p>
+<h4 id="rendering-and-output-mechanism-changes"><a class="toc-anchor d-print-none" href="#rendering-and-output-mechanism-changes">§</a> Rendering and Output Mechanism Changes</h4>
+<p>Spec-Up-T introduces generated artifacts such as specs-generated.json and automated glossary indexing, which are not recognized or usable by Spec-Up’s static site generator. These outputs are vital for maintaining terminological integrity and cross-spec reference management.</p>
+<h4 id="command-line-and-automation-enhancements"><a class="toc-anchor d-print-none" href="#command-line-and-automation-enhancements">§</a> Command-Line and Automation Enhancements</h4>
+<p>The Spec-Up-T command-line interface includes extended tooling for rendering, xref management, and specification freezing (e.g., version snapshots), which depend on newer Node.js capabilities and structural expectations not present in Spec-Up.</p>
+<h4 id="one-way-migration-path-provided"><a class="toc-anchor d-print-none" href="#one-way-migration-path-provided">§</a> One-Way Migration Path Provided</h4>
+<p>The official documentation only supports a forward migration path—from Spec-Up to Spec-Up-T—and includes no tooling or guidance for a reverse path. This unidirectional approach reinforces the directionality of development and the intent to treat Spec-Up-T as a successor, not a drop-in replacement.</p>
+<h4 id="conclusion-2"><a class="toc-anchor d-print-none" href="#conclusion-2">§</a> Conclusion</h4>
+<p>The evolution of Spec-Up-T into a dual-purpose engine (technical specification + integrated glossary) reflects a shift that renders backwards compatibility impractical. Migration to Spec-Up-T is clearly supported and encouraged, but returning to Spec-Up would require dismantling key features and functionality, making such a merge-back both unsupported and strategically unwise.</p>
+<h4 id="acknowledgement"><a class="toc-anchor d-print-none" href="#acknowledgement">§</a> Acknowledgement</h4>
+<p>We would like to thank Spec-Up for laying the groundwork with a simple and accessible way to write specs in Markdown, resulting in a one-pager on the web. Big thanks to Daniel Buchner for kickstarting it all—his early ideas and work made spec writing more structured and collaborative. Spec-Up-T builds on that same spirit, adding a terminology engine to tackle new needs.</p>
+<h3 id="no-current-tev2"><a class="toc-anchor d-print-none" href="#no-current-tev2">§</a> No current TEv2</h3>
+<p>After the retirement of Rieks Joosten, TEv2 has become a dormant project?</p>
+<p>We refer to the Annex of the achievements of TEv2 and how it has shaped Spec-Up-T.</p>
 <!-- file: 80_bibliography.md -->
 <h2 id="informative-references"><a class="toc-anchor d-print-none" href="#informative-references">§</a> Informative references</h2>
 <p><a path-0="tno-terminology-design.github.io" path-1="design-methods" path-2="" href="https://tno-terminology-design.github.io/design-methods/">TNO Terminology Design</a>.</p>
@@ -2426,6 +2345,50 @@ TEv2, on the other hand, is not simple when viewed from a single-context perspec
 who would <em>actually</em> be using it and
 what they would need to be able to do with that
 so that we can make sure that they can use it and do with it what they need to. And IMHO, that is far from trivial; we should give that some attention.</p>
+<h4 id="roadmap-to-tev2"><a class="toc-anchor d-print-none" href="#roadmap-to-tev2">§</a> Roadmap to TEv2</h4>
+<p>As a TEv2 creator and frontman, we share Rieks Joosten’s viewpoint on this proposal for using Spec-Up-T refs and defs.</p>
+<p>He explained that the same features being discussed here were also added to TEv2.</p>
+<p>There is always tension between adding a lot of features and taking a long time or keeping things very minimal. He pointed out that creating glossaries based on cherry-picking glossary entries based on personal preferences can be problematic because it doesn’t actually establish shared understanding and criteria for defining terms.<br>
+The larger the group involved and the more varied their cultural backgrounds, the more problematic that can become. However, that doesn’t mean we shouldn’t start with tools that are actually working right now. Rieks’ personal preference is to use terminology that expresses the author’s intentions clearly. For example, reading the Spec-Up-T documentation was challenging for Rieks, because it was difficult to understand it without more context.</p>
+<p>Rieks would like to have several more sessions on TEv2 so we can still look at how we can use it for our terminology. He’s not opposed to enhancing Spec-Up-T for these features but, at the same time, keeping TEv2 tooling in progress.</p>
+<p>Rieks Joosten concluded that we need to see what tools are actually needed by both authors and readers to help them comprehend the terms they use. He can also explore how TEv2 tooling can be used to produce Spec-Up-T definitions.</p>
+<p>Rieks Joosten was in favor of proceeding with changes to Spec-Up-T but also continuing the work on TEv2 to tackle larger issues of terminology management.</p>
+<h4 id="tev2-explanation"><a class="toc-anchor d-print-none" href="#tev2-explanation">§</a> TEv2 Explanation</h4>
+<h5 id="current-structure"><a class="toc-anchor d-print-none" href="#current-structure">§</a> Current structure</h5>
+<div class="mermaid">
+flowchart LR
+A[A:Root];B[B:ScopeDir];C[/C:SAF/]; D[D:GlossaryDir]; E[E:CurTextDir]
+ A --&gt;|install| B
+ B --&gt;|config| C
+ B --&gt;|populate| D
+ B --&gt;|populate| E
+</div>
+<h4 id="docusaurus-example-current"><a class="toc-anchor d-print-none" href="#docusaurus-example-current">§</a> Docusaurus example CURRENT</h4>
+<div class="mermaid">
+flowchart LR
+A[A:Root];B[B:/docs];C[/C:saf.yaml/]; D[D:glossaries]; E[E:terms]
+ A --&gt;|install| B
+ B --&gt;|create| C
+ B --&gt;|populate| D
+ B --&gt;|populate| E
+</div>
+<h4 id="specup-example-current"><a class="toc-anchor d-print-none" href="#specup-example-current">§</a> SpecUp example CURRENT</h4>
+<div class="mermaid">
+flowchart LR
+A[A:Root];B[B:/spec];C[/C:saf.yaml/]; D[D:glossaries]; E[E:terms]
+ A --&gt;|install| B
+ B --&gt;|create| C
+ B --&gt;|populate| D
+ B --&gt;|populate| E
+</div>
+<h5 id="internal-scope"><a class="toc-anchor d-print-none" href="#internal-scope">§</a> Internal Scope</h5>
+<p><img src="https://github.com/henkvancann/terminology-governance-guide/blob/b64cd36d65c4b0076ccec3e0a30c3f17705e9220/diagrams/internal-scope-terminology-2024-02-26-144340.svg?raw=true" alt="internal-scope-terminology"></p>
+<h5 id="external-scopes-and-internal-scope"><a class="toc-anchor d-print-none" href="#external-scopes-and-internal-scope">§</a> External Scopes and internal scope</h5>
+<p><img src="https://github.com/henkvancann/terminology-governance-guide/blob/b64cd36d65c4b0076ccec3e0a30c3f17705e9220/diagrams/external-glossaries-import-2024-02-26-144418.svg?raw=true" alt="external-scope-terminology"></p>
+<h5 id="full-architecture"><a class="toc-anchor d-print-none" href="#full-architecture">§</a> Full architecture</h5>
+<p><img src="https://github.com/henkvancann/terminology-governance-guide/blob/b64cd36d65c4b0076ccec3e0a30c3f17705e9220/diagrams/tev2-architecture-2024-02-26-144443.svg?raw=true" alt="tev2-architecture"></p>
+<h4 id="always-archive-never-delete"><a class="toc-anchor d-print-none" href="#always-archive-never-delete">§</a> Always archive, never delete</h4>
+<p>Darrell O’Donnell clarified that technical maintainers will not delete any ToIP repos but will only archive them.</p>
 <h3 id="brief-history-of-the-guide"><a class="toc-anchor d-print-none" href="#brief-history-of-the-guide">§</a> Brief history of the guide</h3>
 <p>In 2021, TrustoverIP published the <a path-0="wiki.trustoverip.org" path-1="display" path-2="HOME" path-3="Specification+for+Creating+and+Using+Terms" href="https://wiki.trustoverip.org/display/HOME/Specification+for+Creating+and+Using+Terms">Specification for Creating and Using Terms</a></p>
 <p>In the years to follow, the guide to creating <a path-0="wiki.trustoverip.org" path-1="display" path-2="HOME" path-3="Terms+Wikis" href="https://wiki.trustoverip.org/display/HOME/Terms+Wikis">Term wikis</a> has been established. It gives extensive instructions on how to create wikis, use markdown and hyperlinks, etc.</p>

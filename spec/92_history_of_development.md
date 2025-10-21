@@ -78,7 +78,67 @@ who would *actually* be using it and
 what they would need to be able to do with that
 so that we can make sure that they can use it and do with it what they need to. And IMHO, that is far from trivial; we should give that some attention.
 
+#### Roadmap to TEv2
+As a TEv2 creator and frontman, we share Rieks Joosten's viewpoint on this proposal for using Spec-Up-T refs and defs. 
 
+He explained that the same features being discussed here were also added to TEv2. 
+
+There is always tension between adding a lot of features and taking a long time or keeping things very minimal. He pointed out that creating glossaries based on cherry-picking glossary entries based on personal preferences can be problematic because it doesn't actually establish shared understanding and criteria for defining terms.  
+The larger the group involved and the more varied their cultural backgrounds, the more problematic that can become. However, that doesn't mean we shouldn't start with tools that are actually working right now. Rieks' personal preference is to use terminology that expresses the author's intentions clearly. For example, reading the Spec-Up-T documentation was challenging for Rieks, because it was difficult to understand it without more context.
+
+Rieks would like to have several more sessions on TEv2 so we can still look at how we can use it for our terminology. He's not opposed to enhancing Spec-Up-T for these features but, at the same time, keeping TEv2 tooling in progress. 
+
+Rieks Joosten concluded that we need to see what tools are actually needed by both authors and readers to help them comprehend the terms they use. He can also explore how TEv2 tooling can be used to produce Spec-Up-T definitions.
+
+Rieks Joosten was in favor of proceeding with changes to Spec-Up-T but also continuing the work on TEv2 to tackle larger issues of terminology management.
+
+#### TEv2 Explanation
+
+##### Current structure
+```mermaid
+flowchart LR
+A[A:Root];B[B:ScopeDir];C[/C:SAF/]; D[D:GlossaryDir]; E[E:CurTextDir]
+ A -->|install| B
+ B -->|config| C
+ B -->|populate| D
+ B -->|populate| E 
+```
+
+#### Docusaurus example CURRENT
+```mermaid
+flowchart LR
+A[A:Root];B[B:/docs];C[/C:saf.yaml/]; D[D:glossaries]; E[E:terms]
+ A -->|install| B
+ B -->|create| C
+ B -->|populate| D
+ B -->|populate| E 
+```
+#### SpecUp example CURRENT
+```mermaid
+flowchart LR
+A[A:Root];B[B:/spec];C[/C:saf.yaml/]; D[D:glossaries]; E[E:terms]
+ A -->|install| B
+ B -->|create| C
+ B -->|populate| D
+ B -->|populate| E 
+```
+
+##### Internal Scope
+
+![internal-scope-terminology](https://github.com/henkvancann/terminology-governance-guide/blob/b64cd36d65c4b0076ccec3e0a30c3f17705e9220/diagrams/internal-scope-terminology-2024-02-26-144340.svg?raw=true)
+
+##### External Scopes and internal scope
+
+![external-scope-terminology](https://github.com/henkvancann/terminology-governance-guide/blob/b64cd36d65c4b0076ccec3e0a30c3f17705e9220/diagrams/external-glossaries-import-2024-02-26-144418.svg?raw=true)
+
+##### Full architecture
+
+![tev2-architecture](https://github.com/henkvancann/terminology-governance-guide/blob/b64cd36d65c4b0076ccec3e0a30c3f17705e9220/diagrams/tev2-architecture-2024-02-26-144443.svg?raw=true)
+
+
+#### Always archive, never delete
+
+Darrell O'Donnell clarified that technical maintainers will not delete any ToIP repos but will only archive them.
 
 ### Brief history of the guide
 
