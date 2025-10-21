@@ -1,18 +1,19 @@
-## Normative addendum - Spec-up improvements  {#spec-up-improvements}
+## Normative addendum - Spec-Up-T improvements  {#spec-up-improvements}
 
 This normative section is also called the “Spec-Up-T”.
 
 #### Background
-To simplify the job of tech spec construction and editing, the CTWG has adopted the Spec-Up document rendering tool which is originally a DIF open source project ([repo](https://github.com/decentralized-identity/spec-up)). 
+To simplify the job of tech spec construction and editing, the CTWG has adopted the Spec-Up-T document rendering tool which is originally a DIF open source project ([repo](https://github.com/decentralized-identity/spec-up)). 
 
 #### Objective
-[Spec-Up-T](https://github.com/trustoverip/spec-up-t) enhances Spec-Up for Terminology and Glossary design and implementation. In 2025 we plan to reverse engineer Spec-Up-T enhancements into the original DIF Spec-Up. A joint effort to do so is in the making. See the [issue list](https://github.com/decentralized-identity/spec-up/issues) at DIF user on github.com.
+[Spec-Up-T](https://github.com/trustoverip/spec-up-t) enhances Spec-Up-T for Terminology and Glossary design and implementation. In 2025 we plan to offer Spec-Up-T enhancements to the original DIF Spec-Up-T users through a migration. See the [issue list](https://github.com/decentralized-identity/spec-up/issues) at DIF user on github.com that we try to address in Spec-Up-T.
 
 Based on use cases of certain roles we technically specify improvements in a normative way. This way we were able to implement them right away and manage the process in [github issues](https://github.com/trustoverip/spec-up-t/issues).
 
-In each topical section (header level 3 in this chapter) there'll be various sub-topics (header level 4)
+In each topical section (header level 3 in this chapter) there'll be various sub-topics (header level 4):
+
 - features
-- consistenty checks
+- consistency checks
 - domain checks
 - business rules
   
@@ -21,71 +22,81 @@ Read or reference the [docusaurus website](https://trustoverip.github.io/spec-up
 
 ### refs
 
-One def and 1 to many refs may be present in a spec-up source document.
+One def and 1 to many refs may be present in a Spec-Up-Tsource document.
 
 #### features
 
 For an terminology author there are mainly three relevant functionalities.
-1.  Spec-Up already has a basic glossary feature: `def` tags for defining glossary entries and `ref` tags for marking up terms in the spec that refer to def-tagged terms. Def tags only reference def tags *in the same* Spec-Up document.
+1.  Spec-Up-Talready has a basic glossary feature: `def` tags for defining glossary entries and `ref` tags for marking up terms in the spec that refer to def-tagged terms. Def tags only reference def tags *in the same* Spec-Up-Tdocument.
 
 ### Internal definition (def)
 definitions (`def`s)
 
 ```
-[[def: term { , acronym}, {alias}, {alias}, ... ]]
+[[def: term {, spelling} {, alias}]]
 ~ Lorem Ipsum ...
 ```
 {optional}
 
-A `term` SHOULD be defined as a ToIP definition style : lower case with dashes for spaces.
+A `term` SHOULD be defined as a ToIP definition style : lower case with dashes for spaces. We call this the "[[ref:key form]]".
 
-An `alias` COULD be referenced. If you do so, the reference MUST end up at the definition of `term` This is already operational in the current version of Spec-Up and implemented with nested spans
+The `spelling` COULD be defined differently then the `term`. The `spelling` shows as the main term in the glossary. If you want to show the [[ref:key-formatted]], you only need to specify it once as `[[def: term]]`. SHOULD you want to define aliases that are different than the spelling in the glossary, then first repeat the `spelling` in the definition clause and than a list of aliases you'd like to use in the document and reference to the glossary with.
 
-::: ISSUE
-https://github.com/henkvancann/terminology-governance-guide/issues/1
-:::
-
-> Check `defs` of aliases https://github.com/decentralized-identity/spec-up/blob/master/single-file-test/spec.md#term-references |TBW: replace T link |
-and the working `refs` here https://identity.foundation/spec-up/#term-references
+Example:
+`[[def:key-formatted, key-formatted, key format]]`
 
 
+An `alias` COULD be referenced (by the `ref` tag). If you do so, the reference MUST end up at the definition of `term` This is already operational in the current version of Spec-Up-T and implemented with nested spans.
 
-`acronym` COULD be defined and referenced. If you do so a seperate definition of `acronym` MUST be present in the document itself:
+### Acronym and abbreviations
+Any acronym COULD be defined and referenced by using it as a `term`, a `spelling` or an `alias`. If you do so a in separate definition of your acronym, it SHOULD be a very important acronym within your context.
 
 ```
 [[def: acronym]]
 ~ [the term the acronym refers to]
-
-Example of the duplet:
-
-[[def: KEL]]
-~ [[ref: key event log]]
-
-[[def: key event log | KEL, Key-event log ]]
-~ Lorem Ipsum ...
+```
+#### Beware of duplicates. Example of a duplet:
 
 ```
+[[def: KEL]]
+~ [[ref: key-event-log]]
+
+[[def: key-event-log, KEL, Key-event log]]
+~ Lorem Ipsum ...
+```
+
+Both will show up as "KEL" in the glossary.
 
 #### Don't do this
+
 ```
-[[def: term (acronym)]] and  
-[[ref: phrase]]
+[[def: term (acronym)]]
 ```
+
 but do this
 ```
-[[def: term | acronym]]
+[[def: term-in-key-format, Term spelled some way, acronym]]
+
+~ Lorem ipsum
 ```
-How to add an acronymiation after the term? Two ways possible:
-1. in the markdown, but NOT in the reference to the term:
-  [[ref:]]
-There will be post-markdown processing available to proportionally add an acronym
+
+In the glossary this will show:
+
+> Term spelled some way (acronym,  term-in-key-format)
+> Lorem ipsum
+
+How to add an acronym after the term in Markdown? Several ways possible:
+
+- `term (acronym)` will show as "term (acronym)" without links
+- `[[ref: term]] (acronym)` will show as "term (acronym)" and the link is in "term."
+- `term ([[ref:acronym]])` will show as "term (acronym)" and the link is in "acronym."
 
 ### Internal linking (ref)
 
 ```
 [[ref: phrase]]
 ```
-`phrase` MUST be one of `term`, `acronym` or `alias`
+`phrase` MUST be one of `term`, `spelling` or `alias`
 
 
 Three ways of offering references (`ref`s) to definitions (`def`s) by the author of a text:
@@ -94,37 +105,34 @@ Three ways of offering references (`ref`s) to definitions (`def`s) by the author
 
 
 1. MUST be done in the source by hand
-2. MUST be done by code, we'll add a data-attribute to the resulting hrml that indicates the origin of the link.
+2. MUST be done by code, we'll add a data-attribute to the resulting html that indicates the origin of the link.
 
-
-| TBW where is the registry to ensure uniqueness of doctags and prevention of duplicious doctags? |
-
-###### acronym not yet implement
-As of Nov 2024 acronym is not yet implemented. However, we leave the design in tact in this governance guide.
 
 ##### System feature Consistency
 
 Consistency and rules for [[def:]]s and [[ref:]]s leads to github.io page with all kinds of working internal and external links and clear rules for writers.
 
-#### Consistency pre-caution
+#### Consistency pre-cautions between specifications and glossaries
 
-Each `def` in a local Spec-Up document that has **exactly the same** `def`* existing in any of the remotely referenced document URLs listed in the local document (see the `title` list description in your `specs.json`). 
+These are all governance tasks and SHOULD be implemented in sources. Spec-Up-T will generate the resulting index.html document, but MAY contain broken links and unexpected behavior if the following rules are not obeyed.
 
-Each `ref` has an existing `def`. Each `def` has at least one `ref` or `xref`. 
+Each `def` in a local Spec-Up-T document that has **exactly the same** `def`* existing in any of the remotely referenced document URLs listed in the local document (see the `title` list description in your `specs.json`), can be `tref` and `xref`-ed
 
-Spec-Up code that detects dangling `refs` and `defs`. In other words, code that checks to see that: 
+Each `ref` has an existing `def`. Each `def` has at least one `ref` Each `tref` has at least one `ref` or `xref`.
+
+Spec-Up-T code detects dangling `refs` and `defs`. In other words, code that checks to see that: 
    a. any `ref` tag defined in the spec has a corresponding `def` tag for the glossary entry, and  
    b. every `def` tag defining a glossary entry has at least one `ref` tag pointing to it.
 
 #### Domain checks
-- `term`, or (optional) `alias` or (optional) `acronym` of the term definition used to reference
+- `term`, or (optional) `spelling` or (optional) `aliases` of the term definition used to reference
 
 **Local references**
 
-The most important domain check between a local `ref` and `def` is that they're always pointing back and forth in the same Spec-Up document — they look like:
-`[[def: term, alias, ..., alias ]]`
+The most important domain check between a local `ref` and `def` is that they're always pointing back and forth in the same Spec-Up-T document — they look like:
+`[[def: term, spelling, alias2,  ]]`
 
-`[[ref: phrase]]` where phrase is one of `term` or optional `alias`es.
+`[[ref: phrase]]` where phrase is one of `term` or optional `spelling` and `alias`es.
 
 **Basic domain checks**
 
@@ -132,8 +140,7 @@ The most important domain check between a local `ref` and `def` is that they're 
 2. spaces
    [[def:<term>]] and [[def: <term>]]
 3. Uppercase versus lowercase
-4. Form Phrases
-   | TBW |
+4. Special characters
    
 **Domain checks Spe-Up or github actions**
 
@@ -146,7 +153,7 @@ The most important domain check between a local `ref` and `def` is that they're 
 7. If `acronym` and `alias` are the same, discard `alias`
 
 ##### What is 'the same'
-When there is a collision, meaning an exact match of two terms using the terminology governance guidelines and Spec-Up-T rendering plus form-phrases (noy yet implemented) we consider them the same.
+When there is a collision, meaning an exact match of two terms using the terminology governance guidelines and Spec-Up-T rendering we consider them the same.
 
 > **Example**
 > "Root of trust" -> root-of-trust
@@ -159,29 +166,30 @@ When there is a collision, meaning an exact match of two terms using the termino
 If the Terminology author believe a certain `term` only makes specific sense in the scope of their particular spec, they can define it with a `def` tag in their own internal spec glossary and then `ref` it there.
 :::
 
-**Parser checks Spe-Up or github actions**
+**Parser checks Spec-Up-T or github actions**
 
 1. The system must warn for double `aliases` in more than one `def`
 2. The system must warn for double `acronyms` in more than one `def`
-3. The system must report broken internal links, `ref`s that don't match `term`, `acronym` nor `alias`ses.
+3. The system must report broken internal links, `ref`s that don't match `term`, `spelling` nor `alias`ses.
 
 ### xrefs
 
 We have capability for all Spec-Up-T-based specs to use  `xref`s to reference a common ToIP Glossary in addition to their own internal glossary. The common glossary will be referenced with `title`.
 
 ::: note Usecase Author revisited
-TSWG spec authors would like to use any term already defined in the ToIP Glossary without having to repeat it in their glossary, and they can add any term specific to their spec.
+KSWG spec authors would like to use any term already defined in the ToIP Glossary without having to repeat it in their glossary, and they can add any term specific to their spec.
 :::
 
-- An `xref` tag to enhance Spec-Up code to support *remote* refs.
+- A `tref` tag to transclude a remote definition using Spec-Up-T code to show *remote* defs.
+- An `xref` tag to enhance Spec-Up-T code to support *remote* refs.
   
 #### Features
 
 ##### Feature Title and title collections
 
-It is possible to include references to terms from external spec-up generated specifications. To include a source you would like to pull references from include an external_specs array in your spec config. The value should be a key/value object where the key is used in the external reference below and the value is the URL of the external spec.
+It is possible to include references to terms from external Spec-Up-T generated specifications. To include a source you would like to pull references from include an external_specs array in your spec config. The value should be a key/value object where the key is used in the external reference below and the value is the URL of the external spec.
 
-To include an external term reference within your spec use the following format `[[xref: {title}, {term}]]` where `{title}` is the title given to the spec in the `specs.json` configuration file and `{term}` is the term being used. 
+To include an external term reference within your spec use the following format `[[xref: {title}, {term}, {spelling} ]]` where `{title}` is a MUST HAVE title given to the spec in the `specs.json` configuration file and `{term}` must be the [[ref:key-formatted]] term being used in the remote glossary or specification. 
 
 For example using the `PE` spec given in this example:
 ```json
@@ -207,13 +215,13 @@ Or *remote* reference
 
 `[[xref: title, term]]` 
 
-Where `term` is either a term, acronyms or alias.
+Where `term` is key-formatted.
 
 #### Consistency pre-caution
 
 Each `xref` has an existing `def` in the `title` glossary.
 
-Spec-Up code that detects dangling `refs` and `defs` in the collection of `title`s. In other words, code that checks to see that: 
+Spec-Up-T code that detects dangling `refs` and `defs` in the collection of `title`s. In other words, code that checks to see that: 
    a. any ref tag defined in a spec has a corresponding def tag for the glossary entry somewhere in the collection of `titles`, and  
    b. every def tag defining a glossary entry in any of the `title`s including the local one. has at least one ref tag in any of the `title`s pointing to it.
 
@@ -223,7 +231,7 @@ see [refs](#refs) for applicable initial domain constraints; plus the following.
 
 **Remote references**
 
-`[[xref: title, term]]` is a short unique tag assigned to the remote Spec-Up document containing the def for the term being referenced. So any Spec-Up document that uses remote refs would need to include a [[ref: doctag]] section that looks something like this:
+`[[xref: title, term]]` is a short unique tag assigned to the remote Spec-Up-T document containing the def for the term being referenced. So any Spec-Up-T document that uses remote refs would need to include a [[ref: doctag]] section that looks something like this:
 
 In specs.json:
 ```
@@ -269,7 +277,13 @@ Adopting a term from a related scope (under the ToIP umbrella) or external SHOUL
 
 #### Features context and metadata
 The following metadata MUST be registered:
-- `term`, or (optional) `alias` or (optional) `acronym` of the term definition used to reference
+- `term`
+
+The following metadata COULD be registered:
+- (optional) `spelling` 
+- (optional) `acronyms`
+- (optional) `aliases`
+
 - `url` of the spec in which the term definition list is present and the name of the header
 - `commit hash` of the term definition plus specification adopted
 - `authenticated github user` that adopts the term (create), changes it's context (update) or deletes the context.
@@ -293,7 +307,7 @@ Reference:
 `[[ref: term]]` 
 
 **Example**
-Where mnenomic `KE` is the title of KERI spec in spec-up format and mnenomic `TP` (title) of the ToIP overall glossary in spec-up.
+Where mnenomic `KE` is the title of KERI spec in Spec-Up-T format and mnenomic `TP` (title) of the ToIP overall glossary in spec-up.
 
 ```
 

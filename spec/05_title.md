@@ -26,6 +26,7 @@ Terminology Governance Guide
 **Participate:**
 
 *In the Guide:*
+
 The content is based on:
 - activities and decisions of CTWG in 2024 and 2025; editor: Henk van Cann
 - governance decisions around Spec-Up-T development.

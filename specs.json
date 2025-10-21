@@ -30,7 +30,8 @@
         "90_annex.md",
         "28_design.md",
         "49_split_files.md",
-        "92_history_of_development.md"
+        "92_history_of_development.md",
+        "93_form_phrases.md"   
       ],
       "logo": "https://raw.githubusercontent.com/blockchainbird/spec-up-t-starter-pack/main/spec-up-t-starterpack/logo.svg",
       "logo_link": "https://github.com/blockchainbird/spec-up-t",
